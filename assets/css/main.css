@@ -1,0 +1,725 @@
+/* Main Wedding Theme - Hyper-Premium Royal Indian */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Pinyon+Script&family=Lato:wght@300;400&display=swap');
+
+:root {
+    --gold: #d4af37;
+    --gold-foil: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    --gold-text: #f9eac3;
+    --deep-maroon: #2b0000;
+    --velvet-black: #0a0505;
+    --glass: rgba(20, 0, 0, 0.6);
+    --glass-border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--velvet-black);
+    color: var(--gold-text);
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* --- Background Texture (Mandala) --- */
+.bg-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 0;
+    animation: bgPulse 10s infinite alternate;
+}
+
+@keyframes bgPulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.05);
+    }
+}
+
+/* --- Particles Canvas --- */
+#startParticles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- Opening Curtains (Royal Red) --- */
+.curtain {
+    position: fixed;
+    top: 0;
+    width: 50.5%;
+    height: 100vh;
+    background: radial-gradient(circle at 10% 50%, #4a0000 0%, #1a0000 100%);
+    box-shadow: inset 0 0 100px #000;
+    z-index: 999;
+    transition: transform 3s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.curtain-left {
+    left: 0;
+    border-right: 4px solid #b38728;
+}
+
+.curtain-right {
+    right: 0;
+    border-left: 4px solid #b38728;
+}
+
+.curtain.open {
+    transform: scaleX(0);
+}
+
+/* --- Music Player --- */
+.music-control {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--glass);
+    border: 2px solid var(--gold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.vinyl-icon {
+    font-size: 1.5rem;
+    color: var(--gold);
+}
+
+.vinyl-icon.spinning {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- Main Layout --- */
+.container {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+/* --- The Wedding Card --- */
+.card-wrapper {
+    width: 100%;
+    max-width: 550px;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out;
+}
+
+.card {
+    background: rgba(20, 0, 0, 0.75);
+    border: 1px solid #b38728;
+    border-radius: 12px;
+    padding: 4px;
+    /* Double border effect */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.inner-border {
+    border: 1px solid #b38728;
+    border-radius: 8px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    background: linear-gradient(180deg, rgba(43, 0, 0, 0.4) 0%, rgba(10, 5, 5, 0.6) 100%);
+}
+
+/* Ornamental Corners (CSS Only) */
+.corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--gold);
+    transition: all 0.5s;
+}
+
+.tl {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.tr {
+    top: 10px;
+    right: 10px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.bl {
+    bottom: 10px;
+    left: 10px;
+    border-right: none;
+    border-top: none;
+}
+
+.br {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+}
+
+/* --- Typography & Content --- */
+.intro-text {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: #ffd700;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeSlideUp 1s forwards 3.5s;
+    /* Delay after curtain */
+}
+
+h1.guest-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    background: var(--gold-foil);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    padding: 10px 0;
+    line-height: 1.2;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+    opacity: 0;
+    animation: fadeSlideUp 1s forwards 4s;
+}
+
+.invite-line {
+    margin: 1.5rem 0;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #ccc;
+    opacity: 0;
+    animation: fadeSlideUp 1s forwards 4.5s;
+}
+
+.couple-section {
+    margin: 2rem 0;
+    width: 100%;
+    opacity: 0;
+    animation: fadeSlideUp 1s forwards 5s;
+}
+
+.couple-name {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.ampersand {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 2.5rem;
+    color: #fff;
+    display: block;
+    margin: 5px 0;
+}
+
+/* Event Details Table */
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    /* Split with Line */
+    gap: 15px;
+    width: 100%;
+    margin-top: 2rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeSlideUp 1s forwards 5.5s;
+}
+
+.detail-col {
+    text-align: center;
+}
+
+.vertical-line {
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+}
+
+.label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.data {
+    font-size: 1.1rem;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+.venue-block {
+    grid-column: 1 / -1;
+    /* Span full width */
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    padding-top: 1.5rem;
+}
+
+/* Divider */
+.ornament-divider {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin: 0 0 20px 0;
+    display: block;
+}
+
+.rsvp-msg {
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: #aaa;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: fadeSlideUp 1s forwards 6s;
+}
+
+/* --- Animations --- */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Footer --- */
+footer {
+    margin-top: 2rem;
+    font-size: 0.7rem;
+    color: #555;
+    z-index: 10;
+}
+
+footer a {
+    color: #888;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+footer a:hover {
+    color: var(--gold);
+}
+
+:root {
+    --deep-red: #2a0002;
+    --velvet-black: #050505;
+    --glass: rgba(255, 255, 255, 0.05);
+    /* Lighter glass */
+    --glass-border: rgba(212, 175, 55, 0.4);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--velvet-black);
+    color: var(--gold-light);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    min-height: 100vh;
+}
+
+/* Background Animation */
+#startParticles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.bg-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, #1a0505 0%, #000 100%);
+    z-index: 0;
+}
+
+/* Opening Sequence */
+.curtain {
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100vh;
+    background: #1a0000;
+    background-image: repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 0.2) 0px,
+            rgba(0, 0, 0, 0.2) 20px,
+            transparent 20px,
+            transparent 40px);
+    z-index: 999;
+    transition: transform 2.5s cubic-bezier(0.77, 0, 0.175, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.curtain-left {
+    left: 0;
+    border-right: 5px solid var(--gold);
+}
+
+.curtain-right {
+    right: 0;
+    border-left: 5px solid var(--gold);
+}
+
+.curtain.open {
+    transform: scaleX(0);
+}
+
+/* Music Player */
+.music-control {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+    transition: transform 0.3s;
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+}
+
+.vinyl-icon {
+    font-size: 1.8rem;
+    color: var(--gold);
+}
+
+.vinyl-icon.spinning {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Main Container & 3D Tilt */
+.container {
+    perspective: 1000px;
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.intro-text {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 0.9rem;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    animation: fadeInDown 2s;
+}
+
+/* The Invitaiton Card */
+.card-wrapper {
+    width: 100%;
+    max-width: 500px;
+    transition: transform 0.1s;
+    transform-style: preserve-3d;
+}
+
+.card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    border: 1px solid var(--glass-border);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(212, 175, 55, 0.2);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    /* Gold Shine Sweep Effect */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transform: skewX(-25deg);
+    animation: shine 6s infinite;
+}
+
+/* Typography */
+h1.guest-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    background: linear-gradient(to right, var(--gold), #fff, var(--gold));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 1rem 0;
+    line-height: 1.2;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.couple-names {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    font-weight: 700;
+    margin: 1.5rem 0;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.ampersand {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    color: #fff;
+    opacity: 0.8;
+    display: block;
+    margin: 5px 0;
+}
+
+.event-details {
+    margin: 2rem 0;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 20px 0;
+}
+
+.detail-row {
+    margin: 15px 0;
+    font-size: 1.1rem;
+}
+
+.detail-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.highlight {
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+.rsvp-text {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 2rem;
+}
+
+/* Animations */
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 200%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer & Legal */
+footer {
+    margin-top: 3rem;
+    font-size: 0.7rem;
+    color: #555;
+    position: relative;
+    z-index: 10;
+}
+
+footer a {
+    color: var(--gold-dark);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+footer a:hover {
+    color: var(--gold);
+}
+
+/* --- RSVP Form Custom Inputs --- */
+.radio-label,
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    /* Larger text */
+    color: #ddd;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.radio-label input,
+.checkbox-label input {
+    display: none;
+    /* Hide default */
+}
+
+.radio-custom,
+.checkbox-custom {
+    display: inline-block;
+    width: 36px;
+    /* Increased from 24px */
+    height: 36px;
+    /* Increased from 24px */
+    border: 3px solid var(--gold);
+    /* Thicker border */
+    margin-right: 15px;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    background: rgba(0, 0, 0, 0.3);
+    /* Darker background for contrast */
+}
+
+.radio-custom {
+    border-radius: 50%;
+    /* Circle */
+}
+
+.checkbox-custom {
+    border-radius: 6px;
+    /* Square with soft corners */
+}
+
+/* Hover State */
+.radio-label:hover .radio-custom,
+.checkbox-label:hover .checkbox-custom {
+    box-shadow: 0 0 20px var(--gold);
+    background: rgba(212, 175, 55, 0.2);
+    transform: scale(1.1);
+    /* Subtle grow effect */
+}
+
+/* Checked State */
+input:checked+.radio-custom {
+    background: var(--gold);
+    box-shadow: 0 0 25px var(--gold);
+}
+
+input:checked+.radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    /* Larger dot */
+    height: 14px;
+    background: #000;
+    border-radius: 50%;
+}
+
+input:checked+.checkbox-custom {
+    background: var(--gold);
+    box-shadow: 0 0 25px var(--gold);
+}
+
+input:checked+.checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-size: 24px;
+    /* Larger checkmark */
+    font-weight: bold;
+}

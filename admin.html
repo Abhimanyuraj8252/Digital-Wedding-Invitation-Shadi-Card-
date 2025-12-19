@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Admin | Control Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <style>
+        /* Login Specific Styles */
+        .login-card {
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-cyan);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .error-msg {
+            color: #ff3333;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Security Overlay -->
+    <div id="authOverlay" class="auth-overlay">
+        <div class="login-card">
+            <h2 class="login-title"><i class="fas fa-user-shield"></i> Admin Login</h2>
+
+            <div class="control-group">
+                <input type="text" id="adminUsername" placeholder="Username">
+            </div>
+            <div class="control-group">
+                <input type="password" id="adminPassword" placeholder="Password">
+            </div>
+
+            <button class="generate-btn" onclick="attemptLogin()">
+                Login <i class="fas fa-sign-in-alt"></i>
+            </button>
+
+            <div id="loginError" class="error-msg">
+                <i class="fas fa-exclamation-circle"></i> Invalid Verify Credentials
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <h1><i class="fas fa-rocket"></i> Admin Console</h1>
+
+        <div class="grid-container">
+            <!-- Left Col: Couple Details -->
+            <div class="glass-section">
+                <h3><i class="fas fa-heart"></i> Couple Details</h3>
+                <div class="control-group">
+                    <label>Bride Name</label>
+                    <input type="text" id="brideName" placeholder="e.g. Priya" value="Priya">
+                </div>
+                <div class="control-group">
+                    <label>Groom Name</label>
+                    <input type="text" id="groomName" placeholder="e.g. Arjun" value="Arjun">
+                </div>
+            </div>
+
+            <!-- Right Col: Event Details -->
+            <div class="glass-section">
+                <h3><i class="fas fa-calendar-alt"></i> Event Details</h3>
+                <div class="control-group">
+                    <label>Date</label>
+                    <input type="text" id="eventDate" placeholder="e.g. Dec 15, 2025" value="Dec 15, 2025">
+                </div>
+                <div class="control-group">
+                    <label>Time</label>
+                    <input type="text" id="eventTime" placeholder="e.g. 7:00 PM onwards" value="7:00 PM onwards">
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group full-width">
+            <label><i class="fas fa-map-marker-alt"></i> Venue Name</label>
+            <input type="text" id="venueName" placeholder="e.g. The Grand Palace Hotel" value="The Grand Palace Hotel">
+        </div>
+
+        <div class="control-group full-width">
+            <label>Full Address</label>
+            <input type="text" id="venueAddress" placeholder="e.g. Bandra West, Mumbai, India" value="Mumbai, India">
+        </div>
+
+        <hr class="neon-divider">
+
+        <div class="control-group">
+            <label><i class="fas fa-user-friends"></i> Guest Name (For Invite)</label>
+            <input type="text" id="guestName" placeholder="e.g. Rahul & Family">
+        </div>
+
+        <div class="control-group">
+            <label><i class="fas fa-music"></i> Background Music</label>
+            <select id="presetMusic" onchange="document.getElementById('musicUrlInput').value = ''">
+                <option value="assets/media/shehnai.mp3">Default: Royal Shehnai</option>
+                <option value="assets/media/romantic.mp3">Romantic Instrumental</option>
+                <option value="assets/media/traditional.mp3">Traditional Beats</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>Or Upload Custom MP3</label>
+            <div id="dropZone" class="drop-zone">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <div id="uploadStatus" class="drop-text">Drag & Drop MP3 or Click to Browse</div>
+                <div id="loadingBar" class="progress-bar"></div>
+                <input type="file" id="musicFileInput" hidden accept="audio/*">
+            </div>
+            <input type="text" id="musicUrlInput" placeholder="Music URL will appear here..." readonly>
+        </div>
+
+        <button class="generate-btn" onclick="generateLink()">
+            Generate Private Link <i class="fas fa-magic"></i>
+        </button>
+
+        <div id="resultArea" class="result-area">
+            <div id="resultLink" style="word-wrap: break-word; color: var(--neon-cyan);"></div>
+            <button class="copy-btn" onclick="copyLink()">
+                <i class="fas fa-copy"></i> Copy Link
+            </button>
+            <div id="qrContainer" style="margin-top: 20px; text-align: center;">
+                <!-- QR Code will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/security.js"></script>
+    <script src="assets/js/core.js"></script>
+    <script src="assets/js/admin-logic.js"></script>
+</body>
+
+</html>
